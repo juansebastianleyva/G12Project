@@ -1,10 +1,18 @@
 package usa.mintic.g12proyecto.entities;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "persona")
 public class Persona {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private String correo;
+    private String email;
+    private Integer age;
 
     public Integer getId() {
         return id;
@@ -22,11 +30,19 @@ public class Persona {
         this.name = name;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }

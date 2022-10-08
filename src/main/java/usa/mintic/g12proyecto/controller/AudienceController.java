@@ -46,7 +46,7 @@ public class AudienceController {
     }
 
     @PutMapping("/update")
-    @ResponseStatus(HttpStatus.CREATED) 
+    @ResponseStatus(HttpStatus.CREATED)
     public Audience update(@RequestBody Audience a){
         return audienceService.update(a);
     }

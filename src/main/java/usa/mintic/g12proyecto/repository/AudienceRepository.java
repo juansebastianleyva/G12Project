@@ -8,6 +8,7 @@ import usa.mintic.g12proyecto.repository.crud.AudienceCRUDRepository;
 import usa.mintic.g12proyecto.repository.crud.CategoryCRUDRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class AudienceRepository {
@@ -21,6 +22,18 @@ public class AudienceRepository {
 
     public Audience save(Audience c){
         return audienceCRUDRepository.save(c);
+    }
+
+    public Optional<Audience> getById(int i){
+        return  audienceCRUDRepository.findById(i);
+    }
+
+    public  List<Audience> getByCategoryId(int idCat){
+        //return audienceCRUDRepository.findByCategoryIdOrderByNameAsc(idCat);
+        return  audienceCRUDRepository.findByCapacityGreaterThanEqual(idCat);
+    }
+    public  List<Audience> getByDesc(String desc,int cap){
+        return audienceCRUDRepository.findByDescriptionContainsAndAndCapacityGreaterThan(desc, cap);
     }
 
 }

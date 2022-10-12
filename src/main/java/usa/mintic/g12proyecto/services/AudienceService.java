@@ -67,6 +67,14 @@ public class AudienceService {
         }
         return a;
     }
-
+    public boolean delete(int i){
+        Optional<Audience> k=audienceRepository.getById(i);
+        if(k.isPresent()){
+            audienceRepository.delete(k.get());
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 }

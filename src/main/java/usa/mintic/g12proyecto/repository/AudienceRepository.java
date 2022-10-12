@@ -35,5 +35,8 @@ public class AudienceRepository {
     public  List<Audience> getByDesc(String desc,int cap){
         return audienceCRUDRepository.findByDescriptionContainsAndAndCapacityGreaterThan(desc, cap);
     }
+    public void delete(Audience a){
+        audienceCRUDRepository.delete(a);
+    }
 
 }

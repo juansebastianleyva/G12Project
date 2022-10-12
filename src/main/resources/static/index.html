@@ -6,6 +6,16 @@
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <body>
+
+<div id="loginzone">
+
+    <a href="/oauth2/authorization/github">Haz click para iniciar Sesión</a>
+</div>
+<div id="userZone" style="display: none">
+
+</div>
+
+
 <h1>hola mundo!</h1><br>
 <input type="number" id="idPersona" placeholder="Id.."> <br>
 <input type="text" id="namePersona" placeholder="Nombre"> <br>
@@ -20,6 +30,28 @@
 <div id="resultado"></div>
 </body>
 <script type="text/javascript" src="myScript.js"></script>
+<script type="text/javascript">
+    $.get("/user",function(data){
+        console.log(data);
+        $("#loginzone").hide();
+        $("#userZone").empty();
+        let k="Bienvenido "+data.name+"<br>";
+        $("#userZone").append(k);
+        $("#userZone").append("<img src='"+data.avatar_url+"'>");
+        let button="<button onclick='logout()'>Logout</button>";
+        $("#userZone").append(button);
+        $("#userZone").show();
 
+    });
+
+    function logout(){
+        $.post("/logout", function() {
+            $("#userZone").html('');
+            $("#loginzone").show();
+            $("#userZone").hide();
+        })
+        return true;
+    }
+</script>
 
 </html>

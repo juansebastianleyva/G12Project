@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<body>
+<h1>hola mundo!</h1><br>
+<input type="text" id="nameAudience" placeholder="Nombre"> <br>
+<input type="text" id="ownerAudience" placeholder="Propietario"> <br>
+<input type="number" id="capacityAudience" placeholder="Capacidad"> <br>
+<textarea rows="10" cols="50" id="descriptionAudience" placeholder="Descripción"></textarea> <br>
+<select id="categoryAudience">
+    <option value="3">Categoria 3</option>
+    <option value="4" selected>Categoria 4</option>
+</select>
+<br>
+
+
+<button onclick='saveAudience()'> Guardar Nuevo</button>
+<button onclick='updateAudience()'> Guardar Cambios</button>
+<hr>
+
+<div id="resultado"></div>
+</body>
+<script type="text/javascript" src="myScriptAudience.js"></script>
+
+
+</html>

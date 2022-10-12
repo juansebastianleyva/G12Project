@@ -6,6 +6,7 @@ import usa.mintic.g12proyecto.entities.Category;
 import usa.mintic.g12proyecto.repository.crud.CategoryCRUDRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class CategoryRepository {
@@ -21,4 +22,11 @@ public class CategoryRepository {
         return categoryCRUDRepository.save(c);
     }
 
+    public Optional<Category> getById(int idCategory){
+        return categoryCRUDRepository.findById(idCategory);
+    }
+
+    public void delete(Category c){
+        categoryCRUDRepository.delete(c);
+    }
 }

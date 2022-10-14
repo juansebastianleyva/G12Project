@@ -12,7 +12,7 @@ function getPersonas(){
             for(i=0;i<p.length;i++){
                 $("#resultado").append(p[i].id+" "+p[i].name+" "+p[i].email+" "+p[i].age+" ");
                 $("#resultado").append(" <button onclick='getPersonaById("+p[i].id+")'>Actualizar</button>");
-                $("#resultado").append(" <button onclick='deleteAudience("+p[i].id+")'>Borrar!</button>");
+                $("#resultado").append(" <button onclick='deletePersonaById("+p[i].id+")'>Borrar!</button>");
                 $("#resultado").append("<br>");
             }
         },
@@ -26,6 +26,7 @@ function getPersonas(){
 }
 function getData(){
     let data={
+        id:  $("#idPersona").val(),
         name: $("#namePersona").val(),
         email: $("#emailPersona").val(),
         age:$("#agePersona").val()
@@ -34,7 +35,6 @@ function getData(){
 }
 
 function cleanData(){
-    $("#idPersona").val("");
     $("#namePersona").val("");
     $("#agePersona").val("");
     $("#emailPersona").val("");
@@ -42,6 +42,7 @@ function cleanData(){
 
 function savePersona(){
     let myData=getData();
+    myData.id=null;
     let dataToSend=JSON.stringify(myData);
     $.ajax({
         url : "api/Persona/save",
@@ -73,6 +74,10 @@ function getPersonaById(idPersona){
             $("#namePersona").val(item.name);
             $("#emailPersona").val(item.email);
             $("#agePersona").val(item.age);
+
+            $("#saveNew").hide();
+            $("#updateOld").show();
+            $("#cancelUpdate").show();
         },
         error : function(xhr, status) {
             alert('ha sucedido un problema');
@@ -81,4 +86,58 @@ function getPersonaById(idPersona){
             //  alert('Petición realizada');
         }
     });
+}
+
+function deletePersonaById(idPersona){
+    $.ajax({
+        url : "api/Persona/"+idPersona,
+        type : 'DELETE',
+        dataType : 'json',
+        success : function(item) {
+
+           getPersonas();
+        },
+        error : function(xhr, status) {
+            alert('ha sucedido un problema');
+        },
+        complete : function(xhr, status) {
+            //  alert('Petición realizada');
+        }
+    });
+}
+
+function updatePersona(){
+
+    let myData=getData();
+    let dataToSend=JSON.stringify(myData);
+    $.ajax({
+        url : "api/Persona/update",
+        data : dataToSend,
+        type : 'PUT',
+        dataType : 'json',
+        contentType:'application/json',
+        success : function(dg) {
+            console.log(dg);
+            cleanData();
+            getPersonas();
+
+        },
+        error : function(xhr, status) {
+            alert('ha sucedido un problema');
+        },
+        complete : function(xhr, status) {
+            //  alert('Petición realizada');
+            $("#saveNew").show();
+            $("#cancelUpdate").hide();
+            $("#updateOld").hide();
+        }
+    });
+
+}
+
+function cancelUpdate(){
+    cleanData();
+    $("#saveNew").show();
+    $("#cancelUpdate").hide();
+    $("#updateOld").hide();
 }

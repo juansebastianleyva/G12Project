@@ -1,5 +1,6 @@
 package usa.mintic.g12proyecto.repository;
 
+import org.aspectj.weaver.patterns.PerObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import usa.mintic.g12proyecto.entities.Persona;
@@ -24,6 +25,9 @@ public class PersonaRepository {
 
     public Optional<Persona> getById(int id){
         return personaCRUDRepository.findById(id);
+    }
+    public void delete(Persona p){
+        personaCRUDRepository.delete(p);
     }
 
 

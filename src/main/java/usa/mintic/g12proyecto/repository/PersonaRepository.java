@@ -30,5 +30,8 @@ public class PersonaRepository {
         personaCRUDRepository.delete(p);
     }
 
+    public List<Object[]> getCuantasPersonasPorEdad(){
+        return personaCRUDRepository.totalPersonasPorEdad();
+    }
 
 }

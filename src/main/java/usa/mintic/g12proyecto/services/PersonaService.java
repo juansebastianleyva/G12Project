@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import usa.mintic.g12proyecto.entities.Category;
 import usa.mintic.g12proyecto.entities.Persona;
+import usa.mintic.g12proyecto.entities.custom.PersonasPorEdad;
 import usa.mintic.g12proyecto.repository.PersonaRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,5 +62,37 @@ public class PersonaService {
             }
         }
         return c;
+    }
+
+    public List<PersonasPorEdad> darReporteDeEdad(){
+
+        List<Object[]> results=personaRepository.getCuantasPersonasPorEdad();
+        List<PersonasPorEdad> resultadoReal=new ArrayList<>();
+
+        for(int i=0;i<results.size();i++){
+
+/*
+            PersonasPorEdad p=new PersonasPorEdad();
+            p.setEdad(Integer.parseInt(results.get(i)[0].toString()));
+            p.setCantidad(Integer.parseInt(results.get(i)[1].toString()));
+
+*/
+            /*
+            PersonasPorEdad p=new PersonasPorEdad(Integer.parseInt(results.get(i)[0].toString()),Integer.parseInt(results.get(i)[1].toString()));
+            resultadoReal.add(p);
+            */
+            /*
+            resultadoReal.add(new PersonasPorEdad(Integer.parseInt(results.get(i)[0].toString()),Integer.parseInt(results.get(i)[1].toString())));
+        */
+            /*
+            PersonasPorEdad p=new PersonasPorEdad(results.get(i)[0],results.get(i)[1]);
+            resultadoReal.add(p);
+
+             */
+            resultadoReal.add(new PersonasPorEdad(results.get(i)[0],results.get(i)[1]));
+        }
+
+        return resultadoReal;
+
     }
 }

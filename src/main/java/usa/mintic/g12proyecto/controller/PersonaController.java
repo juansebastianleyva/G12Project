@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import usa.mintic.g12proyecto.entities.Category;
 import usa.mintic.g12proyecto.entities.Persona;
+import usa.mintic.g12proyecto.entities.custom.PersonasPorEdad;
 import usa.mintic.g12proyecto.services.PersonaService;
 
 import java.util.List;
@@ -41,5 +42,8 @@ public class PersonaController {
         return personaService.update(c);
     }
 
-
+    @GetMapping("/report")
+    public List<PersonasPorEdad> getReport(){
+        return personaService.darReporteDeEdad();
+    }
 }
